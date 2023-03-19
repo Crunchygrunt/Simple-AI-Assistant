@@ -50,7 +50,13 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    
+    text_file = open("pass.txt", "r")
+    data = text_file.read()
+    text_file.close()
+    speak('Enter password of your email')
+    pwd = input("Enter Password: ")
+    if pwd == data:
+        server.login('yuvrajsigh1402@gmail.com', data)
 
 if __name__ == '__main__':
     wishMe()

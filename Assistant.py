@@ -7,6 +7,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
 import os
+import smtplib
 
 engine = pyttsx3.init('sapi5')
 voice = engine.getProperty('voices')
@@ -44,6 +45,12 @@ def takeCommand():
         print("Say that again please...")
         return "None"
     return query
+
+def sendEmail(to, content):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    
 
 if __name__ == '__main__':
     wishMe()
@@ -97,3 +104,13 @@ if __name__ == '__main__':
         elif 'change voice' in query:
             engine.setProperty('voice', voice[1].id)
             
+        elif 'emial to yuvraj' in query:
+            try:
+                speak("What should I say?")
+                content = takeCommand()
+                to = "yuvrajyourEmail@gmail.com"
+                sendEmail(to, content)
+                speak("Email has been sent")
+            except Exception as e:
+                print(e)
+                speak("Email not sent")

@@ -57,6 +57,8 @@ def sendEmail(to, content):
     pwd = input("Enter Password: ")
     if pwd == data:
         server.login('yuvrajsigh1402@gmail.com', data)
+    server.sendmail('yuvrajsigh1402@gmail.com', to, content)
+    server.close()
 
 if __name__ == '__main__':
     wishMe()
